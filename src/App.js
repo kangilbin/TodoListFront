@@ -8,11 +8,29 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: [
-        { id: "0", title: "Hello World 1", done: true }, 
-        { id: "1", title: "Hello World 2", done: false }, 
-      ],
+      items: [],
     };
+  }
+  componentDidMount() {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    };
+
+    fetch("http://localhost:8080/todo", requestOptions)
+      .then((response) => response.json())
+      .then(
+        (response) => {
+          this.setState({
+            items: response.data,
+          });
+        },
+        (error) => {
+          this.setState({
+            error,
+          });
+        }
+      );
   }
 
   // (1) 함수 추가
