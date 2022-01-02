@@ -3,6 +3,7 @@ import Todo from './Todo';
 import AddTodo from './AddTodo';
 import React from 'react';
 import { Paper, List, Container } from "@material-ui/core";
+import { call } from "./service/ApiService";
 
 class App extends React.Component {
   constructor(props) {
@@ -12,44 +13,34 @@ class App extends React.Component {
     };
   }
   componentDidMount() {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json"},
-    };
-
-    fetch("http://localhost:8080/todo", requestOptions)
-      .then((response) => response.json())
-      .then(
-        (response) => {
-          this.setState({
-            items: response.data,
-          });
-        },
-        (error) => {
-          this.setState({
-            error,
-          });
-        }
-      );
+    call("/todo", "GET", null).then((response) =>
+      this.setState({ items: response.data })
+    );
   }
 
   // (1) 함수 추가
   add = (item) => {
-    const thisItems = this.state.items;
-    item.id = "ID-" + thisItems.length; // key를 위한 id 추가
-    item.done = false // done 추가
-    thisItems.push(item); // 리스트에 아이템 추가
-    this.setState({items:thisItems}); // 업데이트는 반드시 this.setState로 해야 됨
-    console.log("item : ", this.state.items);
+    // const thisItems = this.state.items;
+    // item.id = "ID-" + thisItems.length; // key를 위한 id 추가
+    // item.done = false // done 추가
+    // thisItems.push(item); // 리스트에 아이템 추가
+    // this.setState({items:thisItems}); // 업데이트는 반드시 this.setState로 해야 됨
+    // console.log("item : ", this.state.items);
+    call("/todo", "POST", item).then((response) =>
+      this.setState({ items: response.data })
+    );
   }
   delete = (item) => {
-    const thisItems = this.state.items;
-    console.log("Before Update Items : ", this.state.items);
-    const newItems = thisItems.filter(e => e.id !== item.id);
-    this.setState({ items: newItems}, () => {
-      //디버깅 콜백
-      console.log("Update Item : ", this.state.items);
-    });
+    // const thisItems = this.state.items;
+    // console.log("Before Update Items : ", this.state.items);
+    // const newItems = thisItems.filter(e => e.id !== item.id);
+    // this.setState({ items: newItems}, () => {
+    //   //디버깅 콜백
+    //   console.log("Update Item : ", this.state.items);
+    // });
+      call("/todo", "DELETE", item).then((response) =>
+      this.setState({ items: response.data })
+    );
   }
   render(){
     var todoItems = this.state.items.length > 0 && (
