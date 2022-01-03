@@ -1,8 +1,7 @@
 import { API_BASE_URL } from "../api-config";
 
-
 export function call(api, method, request) {
-    const options = {
+    let  options = {
         headers: new Headers({
             "Content-Type": "application/json",
         }),
@@ -21,5 +20,13 @@ export function call(api, method, request) {
             }
             return json;
         })
-    );
+    )
+    .catch((error) => {
+        // 추가된 부분
+        console.log(error.status);
+        if (error.status === 403) {
+          window.location.href = "/login"; // redirect
+        }
+        return Promise.reject(error);
+    });
 }
