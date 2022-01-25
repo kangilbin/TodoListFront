@@ -5,6 +5,8 @@ import Login from "./Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import SignUp from "./SignUp";
+import { Switch } from "@material-ui/core";
 
 function Copyright() {
     return (
@@ -22,10 +24,18 @@ class AppRouter extends React.Component {
             <diV>
                 <Router>
                     <div>
-                        <Routes>
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/" element={<App />} />
-                        </Routes>
+                        <Switch>
+                            <Route path="/login" element={<Login />}>
+                                <Login />
+                            </Route>
+                            <Route path="/signup" element={<SignUp />}>
+                                <SignUp />
+                            </Route>
+                            <Route path="/">
+                                <Route path="/" element={<App />} />
+                                <App />
+                            </Route>
+                        </Switch>
                     </div>
                     <Box mt={5}>
                         <Copyright />
