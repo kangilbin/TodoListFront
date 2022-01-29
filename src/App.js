@@ -50,9 +50,9 @@ class App extends React.Component {
     var navigationBar = (
       <AppBar position='static'>
         <Toolbar>
-          <Grid justify='space-between' container>
-            <Grid itme>
-              <Typography variant='h6'>오늘의 할일</Typography>
+          <Grid justifyContent='space-between' container>
+            <Grid item>
+              <Typography variant='h6'>Todo List</Typography>
             </Grid>
             <Grid>
               <Button color='inherit' onClick={signout}>

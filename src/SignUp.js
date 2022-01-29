@@ -25,25 +25,25 @@ class SignUp extends React.Component {
 
     render() {
         return (
-            <Container component="main" maxWidth="xs" style={{ marginTop: "8%"}}>
+            <Container component="main" maxWidth="xs" style={{ marginTop: "8%" }}>
                 <form noValidate onSubmit={this.handleSubmit}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography component="h1" variant="h5">
-                                계정 생성
-                            </Typography>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                    <Typography component="h1" variant="h5">
+                        계정 생성
+                    </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                autoComplete="fname"
-                                name="username"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="username"
-                                label="사용자 이름"
-                                autoFocus
-                            />
+                        <TextField
+                            autoComplete="fname"
+                            name="username"
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="username"
+                            label="유저 이름"
+                            autoFocus
+                        />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
@@ -72,14 +72,14 @@ class SignUp extends React.Component {
                             <Button 
                                 type="submit"
                                 fullWidth
-                                varant="contained"
+                                variant="contained"
                                 color="primary"
                             >
                             계정 생성
                             </Button>
                         </Grid>
                     </Grid>
-                    <Grid container justify="flex-end">
+                    <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Link href="/login" variant="body2">
                                 이미 계정이 있습니까? 로그인 하세요.
